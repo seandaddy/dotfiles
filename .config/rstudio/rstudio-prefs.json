@@ -1,0 +1,20 @@
+{
+    "copilot_enabled": true,
+    "initial_working_directory": "~/Documents/R script",
+    "help_font_size_points": 16,
+    "font_size_points": 16,
+    "editor_theme": "Tomorrow Night Bright",
+    "posix_terminal_shell": "zsh",
+    "copilot_indexing_enabled": true,
+    "default_open_project_location": "~/Documents/R script",
+    "text_rendering": "geometricPrecision",
+    "python_type": "system",
+    "python_version": "3.13.0",
+    "python_path": "~/.pyenv/versions/3.13.0/bin/python",
+    "jobs_tab_visibility": "closed",
+    "relative_line_numbers": true,
+    "editor_keybindings": "vim",
+    "indent_guides": "rainbowlines",
+    "code_formatter": "styler",
+    "syntax_color_console": true
+}
