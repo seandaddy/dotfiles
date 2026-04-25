@@ -1,7 +1,7 @@
 return {
   -- tools
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "markdownlint-cli2",
@@ -10,6 +10,8 @@ return {
         "shellcheck",
         "shfmt",
         "css-lsp",
+        "texlab",
+        "ltex-ls",
       })
     end,
   },
@@ -25,14 +27,7 @@ return {
         diagnostics = {
           underline = true,
           update_in_insert = false,
-          virtual_text = {
-            spacing = 4,
-            source = "if_many",
-            prefix = "●",
-            -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-            -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-            -- prefix = "icons",
-          },
+          virtual_text = false,
           severity_sort = true,
           signs = {
             text = {
@@ -56,18 +51,12 @@ return {
         codelens = {
           enabled = false,
         },
+        folds = {
+          enabled = true,
+        },
         -- Enable lsp cursor word highlighting
         document_highlight = {
           enabled = true,
-        },
-        -- add any global capabilities here
-        capabilities = {
-          workspace = {
-            fileOperations = {
-              didRename = true,
-              willRename = true,
-            },
-          },
         },
         -- options for vim.lsp.buf.format
         -- `bufnr` and `filter` is handled by the LazyVim formatter,
@@ -79,6 +68,17 @@ return {
         -- LSP Server Settings
         -- -@type lspconfig.options
         servers = {
+          ["*"] = {
+            -- add any global capabilities here
+            capabilities = {
+              workspace = {
+                fileOperations = {
+                  didRename = true,
+                  willRename = true,
+                },
+              },
+            },
+          },
           lua_ls = {
             -- mason = false, -- set to false if you don't want this server to be installed with mason
             -- Use this to add any additional keymaps
@@ -110,6 +110,25 @@ return {
               },
             },
           },
+          texlab = {
+            settings = {
+              texlab = {
+                chktex = {
+                  onOpenAndSave = true,
+                  onEdit = true,
+                },
+              },
+            },
+          },
+          ltex = {
+            settings = {
+              ltex = {
+                enabled = { "latex", "tex", "bib", "markdown" },
+                language = "en-US",
+                checkFrequency = "save",
+              },
+            },
+          },
         },
         -- you can do any additional lsp server setup here
         -- return true if you don't want this server to be setup with lspconfig
@@ -135,4 +154,3 @@ return {
     end,
   },
 }
-

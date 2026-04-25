@@ -1,7 +1,7 @@
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- if you use the mini.nvim suite
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" }, -- if you use the mini.nvim suite
     enabled = true,
     -- Moved highlight creation out of opts as suggested by plugin maintainer
     -- There was no issue, but it was creating unnecessary noise when ran

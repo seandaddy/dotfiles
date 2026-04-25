@@ -9,7 +9,7 @@ return {
     { "<leader>os", "<cmd>ObsidianQuickSwitch<cr>", desc = "Quick Switch", mode = "n" },
     { "<leader>ob", "<cmd>ObsidianBacklinks<cr>", desc = "Show location list of backlinks", mode = "n" },
     { "<leader>ot", "<cmd>ObsidianTemplate<cr>", desc = "Follow link under cursor", mode = "n" },
-    { "<leader>op", "<cmd>ObsidianPasteImg<cr>", desc = "Paste imate from clipboard under cursor", mode = "n" },
+    { "<leader>op", "<cmd>ObsidianPasteImg<cr>", desc = "Paste image from clipboard under cursor", mode = "n" },
   },
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault
   -- event = {
@@ -29,7 +29,7 @@ return {
     workspaces = {
       {
         name = "Personal",
-        path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/drsyoh/0. Inbox/",
+        path = "/Users/drsyoh/Tasks/drsyoh",
       },
       -- {
       --   notes_subdir = "Notes",

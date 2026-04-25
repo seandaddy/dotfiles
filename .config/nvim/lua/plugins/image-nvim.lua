@@ -1,29 +1,3 @@
--- https://github.com/3rd/image.nvim
---
--- Filename: ~/github/dotfiles-latest/neovim/neobean/lua/plugins/image-nvim.lua
--- ~/github/dotfiles-latest/neovim/neobean/lua/plugins/image-nvim.lua
-
--- For dependencies see
--- `~/github/dotfiles-latest/neovim/neobean/README.md`
---
--- -- Uncomment the following 2 lines if you use the local luarocks installation
--- -- Leave them commented to instead use `luarocks.nvim`
--- -- instead of luarocks.nvim
--- Notice that in the following 2 commands I'm using luaver
--- package.path = package.path
---   .. ";"
---   .. vim.fn.expand("$HOME")
---   .. "/.luaver/luarocks/3.11.0_5.1/share/lua/5.1/magick/?/init.lua"
--- package.path = package.path
---   .. ";"
---   .. vim.fn.expand("$HOME")
---   .. "/.luaver/luarocks/3.11.0_5.1/share/lua/5.1/magick/?.lua"
---
--- -- Here I'm not using luaver, but instead installed lua and luarocks directly through
--- -- homebrew
--- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua"
--- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
-
 return {
   {
     -- luarocks.nvim is a Neovim plugin designed to streamline the installation
@@ -32,7 +6,7 @@ return {
     -- Neovim users.
     -- https://github.com/vhyrro/luarocks.nvim
     "vhyrro/luarocks.nvim",
-    enabled = false,
+    enabled = true,
     -- this plugin needs to run before anything else
     priority = 1001,
     opts = {
@@ -41,7 +15,7 @@ return {
   },
   {
     "3rd/image.nvim",
-    enabled = false,
+    enabled = true,
     dependencies = { "luarocks.nvim" },
     config = function()
       require("image").setup({
@@ -60,7 +34,7 @@ return {
             -- I set this to true, because if the file has way too many images
             -- it will be laggy and will take time for the initial load
             -- only_render_image_at_cursor = true,
-            only_render_image_at_cursor = vim.g.neovim_mode == "skitty" and false or true,
+            only_render_image_at_cursor = false,
             -- markdown extensions (ie. quarto) can go here
             filetypes = { "markdown", "vimwiki", "html" },
           },
@@ -103,7 +77,7 @@ return {
         max_height_window_percentage = vim.g.neovim_mode == "skitty" and 30 or 40,
 
         -- toggles images when windows are overlapped
-        window_overlap_clear_enabled = false,
+        window_overlap_clear_enabled = true,
         window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
 
         -- auto show/hide images when the editor gains/looses focus
@@ -116,6 +90,25 @@ return {
 
         -- render image files as images when opened
         hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" },
+      })
+
+      -- Fix for images sticking after exit
+      vim.api.nvim_create_autocmd("VimLeave", {
+        callback = function()
+          local ok, image = pcall(require, "image")
+          if ok then
+            -- try to use the clear method if available
+            if image.clear then
+              image.clear()
+            else
+              -- fallback to iterating over images
+              local images = image.get_images()
+              for _, img in ipairs(images) do
+                img:clear()
+              end
+            end
+          end
+        end,
       })
     end,
   },

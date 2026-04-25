@@ -17,7 +17,7 @@ require("lazy").setup({
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
       opts = {
-        -- colorscheme = "catppuccin",
+        colorscheme = "kanagawa",
         news = {
           lazyvim = true,
           neovim = true,
@@ -27,7 +27,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.linting.eslint" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
     { import = "lazyvim.plugins.extras.lang.r" },
-    { import = "lazyvim.plugins.extras.lang.tex" },
+    -- { import = "lazyvim.plugins.extras.lang.typst" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
@@ -49,7 +49,7 @@ require("lazy").setup({
     rtp = {
       disabled_plugins = {
         "gzip",
-        "neo-tree",
+        -- "neo-tree",
         -- "matchit",
         -- "matchparen",
         "netrwPlugin",

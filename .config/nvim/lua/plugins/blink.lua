@@ -15,6 +15,7 @@ return {
       "rafamadriz/friendly-snippets",
       "moyiz/blink-emoji.nvim",
       "ray-x/cmp-sql",
+      "L3MON4D3/LuaSnip",
     },
 
     -- use a release tag to download pre-built binaries
@@ -27,6 +28,17 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      snippets = {
+        expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
+        active = function(filter)
+          if filter and filter.direction then
+            return require('luasnip').jumpable(filter.direction)
+          end
+          return require('luasnip').in_snippet()
+        end,
+        jump = function(direction) require('luasnip').jump(direction) end,
+      },
+
       -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
       -- 'super-tab' for mappings similar to vscode (tab to accept)
       -- 'enter' for enter to accept
@@ -40,8 +52,7 @@ return {
       --
       -- See :h blink-cmp-config-keymap for defining your own keymap
       keymap = {
-        preset = "default",
-        ["<C-Z>"] = { "accept", "fallback" },
+        preset = "super-tab",
       },
 
       appearance = {

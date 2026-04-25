@@ -10,7 +10,6 @@ return {
       "gitignore",
       "http",
       "json",
-      "latex",
       "r",
       "scss",
       "sql",
@@ -19,7 +18,8 @@ return {
     },
     auto_install = true,
     sync_install = false,
-    highlight = { enable = true },
+    ignore_install = { "latex" },
+    highlight = { enable = true, disable = { "latex", "oil" } },
     indent = { enable = true },
 
     incremental_selection = {

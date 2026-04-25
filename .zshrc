@@ -92,10 +92,7 @@ alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # ------------------------------------------------------------------------------
 eval "$(fzf --zsh)"
 
-# zoxide (better `cd`)
-# ------------------------------------------------------------------------------
-eval "$(zoxide init zsh)"
-alias cd="z"
+# zoxide (better `cd`) - alias set after init below
 
 # eza (better `ls`)
 # ------------------------------------------------------------------------------
@@ -112,10 +109,9 @@ alias lta1="eza -lTag --level=1 --icons"
 alias lta2="eza -lTag --level=2 --icons"
 alias lta3="eza -lTag --level=3 --icons"
 
+export EDITOR=nvim
 # Other aliases
 # ------------------------------------------------------------------------------
-alias vim="nvim"
-alias vi="nvim"
 alias n="nvim"
 alias c="clear"
 
@@ -130,5 +126,20 @@ eval "$(pyenv init --path)"
 # Created by `pipx` on 2024-10-17 14:49:33
 export PATH="$PATH:/Users/drsyoh/.local/bin"
 
+# Rust cargo binaries
+export PATH="$HOME/.cargo/bin:$PATH"
+
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/drsyoh/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+[ -f ~/.zshrc_local ] && source ~/.zshrc_local
+# notebooklm / nlwflow
+export PATH="$HOME/Tools/notebooklm-llm-wiki-flow/.venv/bin:$PATH"
+
+# zoxide — must be last
+eval "$(zoxide init zsh)"
+alias cd="z"
